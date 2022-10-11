@@ -1,0 +1,59 @@
+.block {
+    background-color: bisque;
+    height: 56px;
+    width: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid black;
+}
+
+.head {
+    display: flex;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+
+}
+
+.main {
+    height: 752px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darksalmon;
+
+}
+
+.uuu {
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+}
+
+.heading {
+    text-align: center;
+    margin: 0;
+}
+
+.emoji {
+    position: absolute;
+    bottom: 0px;
+    /* transform: translate(-580px);  */
+    /* transform: translateY(280px);  */
+}
+
+.emoji2 {
+    position: absolute;
+    bottom: 0px;
+    left: -10px;
+}
+
+.emote {
+    transition: all 2s ease-in-out;
+}
+
+.trans {
+    transition: background-color 2s ease-in 2s;
+}
