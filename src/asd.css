@@ -19,9 +19,7 @@
 .main {
     height: 752px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
     background-color: darksalmon;
 
 }
@@ -56,4 +54,23 @@
 
 .trans {
     transition: background-color 2s ease-in 2s;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.description {
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+.left {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+}
+.text {
+    font-size: 16px;
+    font-weight: bold;
 }
