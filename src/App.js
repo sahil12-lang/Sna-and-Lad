@@ -33,8 +33,8 @@ export default function App() {
         setDisableBtn(true);
         setDisableBtn2(true);
         alert("Winner1");
-        movePlayer1Key(false);
-        movePlayer2Key(false);
+        Player1Key(false);
+        Player2Key(false);
       }
     }, 1500);
   }
@@ -266,13 +266,20 @@ export default function App() {
   return (
     <div className="main"> 
     <div className="left">  
-        <span className="description">Description:-</span> <br />
-        <span className="text"> 1. Play with Arrow keys  </span> <br />
-        <span className="text"> 2. Arrows :- <br /> a) Left Arrow Key for Player1 <br />
+        <span className="description">Description:-</span> <br /> <br />
+        <span className="text"> 1. Play with Arrow keys :- </span> <br />
+        <span className="text"> a) Left Arrow Key for Player1 <br />
                   b) Right Arrow Key for Player2
-         </span>
+         </span> <br /> <br />
+        <span className="text"> 2. Green Block will upgrade you to <br />
+          other Green Block
+          </span> <br /> <br />
+        <span className="text"> 3. Red Block will downgrade you to <br />
+          other Red Block
+          </span> <br />
+
       </div>
-      <div className="center" >  
+      <div className="center" > 
       <div className="uuu" id="box-wrapper">
         <div style={{ display: "block", textAlign: "center" }}>
           {/* <button onClick = 
