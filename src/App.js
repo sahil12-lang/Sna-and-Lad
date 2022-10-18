@@ -28,15 +28,7 @@ export default function App() {
     setXposi(actualXPosi);
     let calculatedYPosi = Math.floor((currPosi - 1) / 10) * 61;
     setYposi(calculatedYPosi);
-    setTimeout(() => {
-      if (currPosi === 100) {
-        setDisableBtn(true);
-        setDisableBtn2(true);
-        alert("Winner1");
-        Player1Key(false);
-        Player2Key(false);
-      }
-    }, 1500);
+    
   }
   const change2 = () => {
     let boxX2 = document.getElementById("box-wrapper").getBoundingClientRect().x;
@@ -233,7 +225,13 @@ export default function App() {
           movePlayer1Key(false);
           movePlayer2Key(false);
         }, 2000);
-      } 
+      } else if (currPosi === 100){
+        alert("winner1");
+        setCurrPosi(1);
+        setCurrPosi2(1);
+        setSampleNumber(0);
+
+      }
     }
   };
 
@@ -259,6 +257,11 @@ export default function App() {
           movePlayer1Key(false);
           movePlayer2Key(false);
         }, 2000);
+      } else if (currPosi === 100) {
+        alert("winner2");
+        setCurrPosi(1);
+        setCurrPosi2(1);
+        setSampleNumber(0);
       }
     }
   };  
@@ -266,30 +269,25 @@ export default function App() {
   return (
     <div className="main"> 
     <div className="left">  
-        <span className="description">Description:-</span> <br /> <br />
+        <span className="description">Game Rules:-</span> <br /> <br />
         <span className="text"> 1. Play with Arrow keys :- </span> <br />
         <span className="text"> a) Left Arrow Key for Player1 <br />
-                  b) Right Arrow Key for Player2
+                  b) Right Arrow Key for Player2 <br />
+                  (When you'll press the arrow key <br /> it'll generate a Random Dice Number)
          </span> <br /> <br />
-        <span className="text"> 2. Green Block will upgrade you to <br />
-          other Green Block
+        <span className="text"> 2. You'll get the dice Number below the Board
+        </span> <br /> <br />
+        <span className="text"> 3. <span className="text-green"> Green Blocks </span> will upgrade you to <br />
+          another Green Block
           </span> <br /> <br />
-        <span className="text"> 3. Red Block will downgrade you to <br />
-          other Red Block
-          </span> <br />
+        <span className="text"> 4.<span className="text-red"> Red Blocks </span> will downgrade you to <br />
+          another Red Block
+          </span> <br /> <br />
 
       </div>
       <div className="center" > 
       <div className="uuu" id="box-wrapper">
-        <div style={{ display: "block", textAlign: "center" }}>
-          {/* <button onClick = 
-          //  {() => { move('left') , getRandomNumber }}
-          {getRandomNumber}
-            disabled={disableBtn} style={{ marginTop: "20px" }}>
-            Player 1
-          </button>
-          <button onClick={getRandomNumber2} 
-           style={{ marginTop: "20px" }} disabled={disableBtn2}> Player 2 </button> */}
+        <div style={{ display: "block", textAlign: "center", }}>
           <p style={{ margin: 0 }}> {sampleNumber} </p>
         </div>
         <div>
