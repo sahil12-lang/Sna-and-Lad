@@ -17,7 +17,7 @@
 }
 
 .main {
-    height: 752px;
+    height: 720px;
     width: 100%;
     /* display: flex; */
     background-color: darksalmon;
@@ -66,11 +66,19 @@
     font-weight: bold;
 }
 .left {
-    width: 200px;
-    height: 300px;
     position: absolute;
 }
 .text {
     font-size: 16px;
     font-weight: bold;
+}
+.text-green {
+    font-size: 16px;
+    font-weight: bold;
+    color: green;
+}
+.text-red {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
 }
