@@ -218,7 +218,7 @@ export default function App() {
       setDisableBtn(true);
       setTimeout(() => {
         setDisableBtn2(false);
-        if(setSampleNumber===true){
+        if(sampleNumber){
         setSampleNumber2(true);
         setSampleNumber(false);
         }
@@ -237,7 +237,7 @@ export default function App() {
         setSampleNumber(0);
       }
     }
-  };
+  }; 
 
   const getRandomNumber2 = () => {
     let min = 1;
@@ -253,7 +253,7 @@ export default function App() {
       setDisableBtn2(true);
       setTimeout(() => {
         setDisableBtn(false);
-        if(setSampleNumber2===true){
+        if(sampleNumber2){
         setSampleNumber(true);
         setSampleNumber2(false);
         }
@@ -280,10 +280,12 @@ export default function App() {
         <span className="description">Game Rules:-</span> <br /> <br />
         <span className="text"> 1. Play with Arrow keys :- </span> <br />
         <span className="text"> a) Left Arrow Key for Player1 <br />
-          b) Right Arrow Key for Player2 <br />
+          b) Right Arrow Key for Player2  <br />
           (When you'll press the arrow key <br /> it'll generate a Random Dice Number)
         </span> <br /> <br />
-        <span className="text"> 2. You'll get the dice Number below the Board
+        <span className="text"> 2. You'll get the dice Number below the Board <br />
+          <span>a) Player1 &#128512;  <span style={{ color: "darkblue" }}> (DarkBlue Color Number) </span> </span> <br />
+          <span>b) Player2 &#128527;<span style={{ color: "darkgreen" }}> (DarkGreen Color Number) </span></span>
         </span> <br /> <br />
         <span className="text"> 3. <span className="text-green"> Green Blocks </span> will upgrade you to <br />
           another Green Block
@@ -344,8 +346,8 @@ export default function App() {
           <h1 className="heading">Teleporting Blocks</h1>
         </div>
         <div className="fade-in">
-          <span>  {sampleNumber} {sampleNumber2} </span>
-
+          <span style={{color: "darkblue"}}>  {sampleNumber} </span>
+          <span style={{color: "darkgreen"}}> {sampleNumber2}  </span>
         </div>
         {/* <div className="fade-in2">
           <p> {sampleNumber2} </p>
