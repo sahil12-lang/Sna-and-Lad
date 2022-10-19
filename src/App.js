@@ -4,7 +4,8 @@ import { useState } from "react";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 export default function App() {
-  const [sampleNumber, setSampleNumber] = useState(0);
+  const [sampleNumber, setSampleNumber] = useState(true);
+  const [sampleNumber2, setSampleNumber2] = useState(false);
   const [currPosi, setCurrPosi] = useState(1);
   const [currPosi2, setCurrPosi2] = useState(1);
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -28,7 +29,7 @@ export default function App() {
     setXposi(actualXPosi);
     let calculatedYPosi = Math.floor((currPosi - 1) / 10) * 61;
     setYposi(calculatedYPosi);
-    
+
   }
   const change2 = () => {
     let boxX2 = document.getElementById("box-wrapper").getBoundingClientRect().x;
@@ -61,15 +62,15 @@ export default function App() {
           if (Player1Key === false) {
             movePlayer1Key(false);
             movePlayer2Key(false);
-            if (Player2Key === false){
+            if (Player2Key === false) {
               setTimeout(() => {
                 movePlayer2Key(true);
                 setDisableBtn2(false);
               }, 2000);
             }
           }
-        }, 2000);   
-        
+        }, 2000);
+
       } else if (greenMine.includes(currPosi)) {
 
         let availableGBlock = greenMine.map(item => item > currPosi && item).filter(Boolean);
@@ -90,7 +91,7 @@ export default function App() {
             }
           }
         }, 2000)
-        
+
       }
     } else setTeleportState(false);
 
@@ -108,7 +109,7 @@ export default function App() {
           if (Player2Key === false) {
             movePlayer1Key(false);
             movePlayer2Key(false);
-            if (Player1Key === false){
+            if (Player1Key === false) {
               setTimeout(() => {
                 movePlayer1Key(true);
                 setDisableBtn(false)
@@ -116,7 +117,7 @@ export default function App() {
             }
           }
         }, 2000);
-        
+
       } else if (greenMine.includes(currPosi2)) {
 
         let availableGBlock2 = greenMine.map(item => item > currPosi2 && item).filter(Boolean);
@@ -136,7 +137,7 @@ export default function App() {
             }
           }
         }, 2000);
-       
+
       }
     } else setTeleportState2(false)
   }
@@ -156,51 +157,51 @@ export default function App() {
     shouldTeleport2();
   }, [xPosi2, yPosi2]);
 
- 
-  const onKeyDown = (e) => {
-      switch (e.keyCode){
-        case 37:
-          if (Player1Key){
-            getRandomNumber();
-            movePlayer1Key(false);
-            setTimeout(() => {
-              movePlayer2Key(true);
-            }, 2000);
-            setTimeout(() => {
-              if (currPosi === 100) {
-                alert("Winner1");
-                movePlayer1Key(false);
-                movePlayer2Key(false);
-              }
-            }, 1500);
-          }
-          break;
-        case 39:
-          if (Player2Key){
-            getRandomNumber2();
-            movePlayer2Key(false);
-            setTimeout(() => {
-              movePlayer1Key(true);
-            }, 2000);
-            setTimeout(() => {
-              if (currPosi2 === 100) {
-                alert("Winner2");
-                movePlayer1Key(false);
-                movePlayer2Key(false);
-              }
-            }, 1500);
-          }
-          break;
-        default:    
-      }
-    };
 
-  useEffect(()=> {
-    document.addEventListener('keydown', onKeyDown );
+  const onKeyDown = (e) => {
+    switch (e.keyCode) {
+      case 37:
+        if (Player1Key) {
+          getRandomNumber();
+          movePlayer1Key(false);
+          setTimeout(() => {
+            movePlayer2Key(true);
+          }, 2000);
+          setTimeout(() => {
+            if (currPosi === 100) {
+              alert("Winner1");
+              movePlayer1Key(false);
+              movePlayer2Key(false);
+            }
+          }, 1500);
+        }
+        break;
+      case 39:
+        if (Player2Key) {
+          getRandomNumber2();
+          movePlayer2Key(false);
+          setTimeout(() => {
+            movePlayer1Key(true);
+          }, 2000);
+          setTimeout(() => {
+            if (currPosi2 === 100) {
+              alert("Winner2");
+              movePlayer1Key(false);
+              movePlayer2Key(false);
+            }
+          }, 1500);
+        }
+        break;
+      default:
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown);
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [onKeyDown] );
+  }, [onKeyDown]);
 
   const getRandomNumber = () => {
     let min = 1;
@@ -217,6 +218,10 @@ export default function App() {
       setDisableBtn(true);
       setTimeout(() => {
         setDisableBtn2(false);
+        if(setSampleNumber===true){
+        setSampleNumber2(true);
+        setSampleNumber(false);
+        }
       }, 2000);
       if (setDisableBtn2 === false) {
         setDisableBtn(false)
@@ -225,12 +230,11 @@ export default function App() {
           movePlayer1Key(false);
           movePlayer2Key(false);
         }, 2000);
-      } else if (currPosi === 100){
+      } else if (currPosi === 100) {
         alert("winner1");
         setCurrPosi(1);
         setCurrPosi2(1);
         setSampleNumber(0);
-
       }
     }
   };
@@ -239,7 +243,7 @@ export default function App() {
     let min = 1;
     let max = 6;
     let newDice2 = Math.round(Math.random() * (max - min) + min);
-    setSampleNumber(newDice2);
+    setSampleNumber2(newDice2);
     // Player2Key(true);
     let newPosi2 = currPosi2 + newDice2;
     if (newPosi2 <= 100) {
@@ -248,7 +252,11 @@ export default function App() {
     if (getRandomNumber2) {
       setDisableBtn2(true);
       setTimeout(() => {
-        setDisableBtn(false)
+        setDisableBtn(false);
+        if(setSampleNumber2===true){
+        setSampleNumber(true);
+        setSampleNumber2(false);
+        }
       }, 2000);
       if (setDisableBtn === false) {
         setDisableBtn2(false)
@@ -261,84 +269,88 @@ export default function App() {
         alert("winner2");
         setCurrPosi(1);
         setCurrPosi2(1);
-        setSampleNumber(0);
+        setSampleNumber2(0);
       }
     }
   };  
-    
+
   return (
-    <div className="main"> 
-    <div className="left">  
+    <div className="main">
+      <div className="left">
         <span className="description">Game Rules:-</span> <br /> <br />
         <span className="text"> 1. Play with Arrow keys :- </span> <br />
         <span className="text"> a) Left Arrow Key for Player1 <br />
-                  b) Right Arrow Key for Player2 <br />
-                  (When you'll press the arrow key <br /> it'll generate a Random Dice Number)
-         </span> <br /> <br />
+          b) Right Arrow Key for Player2 <br />
+          (When you'll press the arrow key <br /> it'll generate a Random Dice Number)
+        </span> <br /> <br />
         <span className="text"> 2. You'll get the dice Number below the Board
         </span> <br /> <br />
         <span className="text"> 3. <span className="text-green"> Green Blocks </span> will upgrade you to <br />
           another Green Block
-          </span> <br /> <br />
+        </span> <br /> <br />
         <span className="text"> 4.<span className="text-red"> Red Blocks </span> will downgrade you to <br />
           another Red Block
-          </span> <br /> <br />
+        </span> <br /> <br />
 
       </div>
-      <div className="center" > 
-      <div className="uuu" id="box-wrapper">
-        <div style={{ display: "block", textAlign: "center", }}>
-          <p style={{ margin: 0 }}> {sampleNumber} </p>
-        </div>
-        <div>
-          <div
-            className="emote"
-            style={{
-              transform: `translateX(${xPosi}px) translateY(-${yPosi}px)`,
-            }}
-          >
-            <p className="emoji">&#128512;</p>
+      <div className="center" >
+        <div className="uuu" id="box-wrapper">
+          <div>
+            <div
+              className="emote"
+              style={{
+                transform: `translateX(${xPosi}px) translateY(-${yPosi}px)`,
+              }}
+            >
+              <p className="emoji" >&#128512;</p>
+            </div>
+            <div
+              className="emote"
+              style={{
+                transform: `translateX(${xPosi2}px) translateY(-${yPosi2}px)`,
+              }}
+            >
+              <p className="emoji2"  >&#128527;</p>
+            </div>
           </div>
-          <div
-            className="emote"
-            style={{
-              transform: `translateX(${xPosi2}px) translateY(-${yPosi2}px)`,
-            }}
-          >
-            <p className="emoji2"  >&#128527;</p>
-          </div>
-        </div>
 
-        {arr.map((val, ind, arru) => (
-          <div
-            className="head"
-            style={{
-              flexDirection: val % 2 === 0 ? "row-reverse" : "row",
-            }}
-            key={val.toString()}
-          >
-            {arr.map((value, index, ar) => (
-              <div style={{}}>
-                <div
-                  id={value + parseInt(ind + "0")}
-                  className="block"
-                  style={{
-                    backgroundColor: redMine.includes(
-                    value + parseInt(ind + "0")) ? "rgb(136, 8, 8)" : "white" &&
-                    greenMine.includes(value + parseInt(ind + "0")) ? "rgb(34, 139, 34)" : "white"
-                    && value % 2 === 0 ? "skyblue" : "skyblue",
-                  }}
-                  key={value.toString()}
-                >
-                  <span>{value + parseInt(ind + "0")}</span>
+          {arr.map((val, ind, arru) => (
+            <div
+              className="head"
+              style={{
+                flexDirection: val % 2 === 0 ? "row-reverse" : "row",
+              }}
+              key={val.toString()}
+            >
+              {arr.map((value, index, ar) => (
+                <div style={{}}>
+                  <div
+                    id={value + parseInt(ind + "0")}
+                    className="block"
+                    style={{
+                      backgroundColor: redMine.includes(
+                        value + parseInt(ind + "0")) ? "rgb(136, 8, 8)" : "white" &&
+                          greenMine.includes(value + parseInt(ind + "0")) ? "rgb(34, 139, 34)" : "white"
+                            && value % 2 === 0 ? "skyblue" : "skyblue",
+                    }}
+                    key={value.toString()}
+                  >
+                    <span>{value + parseInt(ind + "0")}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ))}
-        <h1 className="heading">Teleporting Blocks</h1>
+              ))}
+            </div>
+          ))}
+          <h1 className="heading">Teleporting Blocks</h1>
+        </div>
+        <div className="fade-in">
+          <span>  {sampleNumber} {sampleNumber2} </span>
+
+        </div>
+        {/* <div className="fade-in2">
+          <p> {sampleNumber2} </p>
+        </div> */}
       </div>
-    </div>
     </div>
   );
 }
