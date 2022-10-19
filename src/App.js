@@ -215,12 +215,13 @@ export default function App() {
     }
     setDisableBtn(false);
     if (getRandomNumber) {
+      setSampleNumber2(false)
       setDisableBtn(true);
       setTimeout(() => {
         setDisableBtn2(false);
         if(sampleNumber){
         setSampleNumber2(true);
-        setSampleNumber(false);
+        // setSampleNumber(false);
         }
       }, 2000);
       if (setDisableBtn2 === false) {
@@ -244,18 +245,19 @@ export default function App() {
     let max = 6;
     let newDice2 = Math.round(Math.random() * (max - min) + min);
     setSampleNumber2(newDice2);
-    // Player2Key(true);
     let newPosi2 = currPosi2 + newDice2;
     if (newPosi2 <= 100) {
       setCurrPosi2(newPosi2);
     }
     if (getRandomNumber2) {
+
+      setSampleNumber(false)
       setDisableBtn2(true);
       setTimeout(() => {
         setDisableBtn(false);
         if(sampleNumber2){
         setSampleNumber(true);
-        setSampleNumber2(false);
+        // setSampleNumber2(false);
         }
       }, 2000);
       if (setDisableBtn === false) {
