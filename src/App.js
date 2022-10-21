@@ -4,7 +4,7 @@ import { useState } from "react";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 export default function App() {
-  const [sampleNumber, setSampleNumber] = useState(true);
+  const [sampleNumber, setSampleNumber] = useState(0);
   const [sampleNumber2, setSampleNumber2] = useState(false);
   const [currPosi, setCurrPosi] = useState(1);
   const [currPosi2, setCurrPosi2] = useState(1);
@@ -21,6 +21,7 @@ export default function App() {
   const [yPosi2, setYposi2] = useState(0);
   const [Player1Key, movePlayer1Key] = useState(true);
   const [Player2Key, movePlayer2Key] = useState(false);
+  
 
   const change = () => {
     let boxX = document.getElementById("box-wrapper").getBoundingClientRect().x;
@@ -29,7 +30,14 @@ export default function App() {
     setXposi(actualXPosi);
     let calculatedYPosi = Math.floor((currPosi - 1) / 10) * 61;
     setYposi(calculatedYPosi);
-
+    setTimeout(() => {
+       if(currPosi===100){
+        alert("winner1");
+        setCurrPosi(1);
+        setCurrPosi2(1);
+        setSampleNumber2(0);
+      }
+    }, 1500);
   }
   const change2 = () => {
     let boxX2 = document.getElementById("box-wrapper").getBoundingClientRect().x;
@@ -40,11 +48,10 @@ export default function App() {
     setYposi2(calculatedYPosi2);
     setTimeout(() => {
       if (currPosi2 === 100) {
-        setDisableBtn(true);
-        setDisableBtn2(true);
         alert("Winner2");
-        movePlayer1Key(false);
-        movePlayer2Key(false);
+        setCurrPosi(1);
+        setCurrPosi2(1);
+        setSampleNumber2(0);
       }
     }, 1500);
   }
@@ -208,7 +215,6 @@ export default function App() {
     let max = 6;
     let newDice = Math.round(Math.random() * (max - min) + min);
     setSampleNumber(newDice);
-    // Player1Key(true);
     let newPosi = currPosi + newDice;
     if (newPosi <= 100) {
       setCurrPosi(newPosi);
@@ -222,7 +228,7 @@ export default function App() {
         if(sampleNumber){
         setSampleNumber2(true);
         // setSampleNumber(false);
-        }
+        } 
       }, 2000);
       if (setDisableBtn2 === false) {
         setDisableBtn(false)
@@ -231,12 +237,7 @@ export default function App() {
           movePlayer1Key(false);
           movePlayer2Key(false);
         }, 2000);
-      } else if (currPosi === 100) {
-        alert("winner1");
-        setCurrPosi(1);
-        setCurrPosi2(1);
-        setSampleNumber(0);
-      }
+      } 
     }
   }; 
 
@@ -250,7 +251,6 @@ export default function App() {
       setCurrPosi2(newPosi2);
     }
     if (getRandomNumber2) {
-
       setSampleNumber(false)
       setDisableBtn2(true);
       setTimeout(() => {
@@ -267,12 +267,13 @@ export default function App() {
           movePlayer1Key(false);
           movePlayer2Key(false);
         }, 2000);
-      } else if (currPosi === 100) {
-        alert("winner2");
-        setCurrPosi(1);
-        setCurrPosi2(1);
-        setSampleNumber2(0);
       }
+      //  else if (currPosi2 === 100) {
+      //   alert("winner2");
+      //   setCurrPosi(1);
+      //   setCurrPosi2(1);
+      //   setSampleNumber2(0);
+      // }
     }
   };  
 
@@ -348,12 +349,12 @@ export default function App() {
           <h1 className="heading">Teleporting Blocks</h1>
         </div>
         <div className="fade-in">
-          <span style={{color: "darkblue"}}>  {sampleNumber} </span>
-          <span style={{color: "darkgreen"}}> {sampleNumber2}  </span>
+          <span style={{ color: "darkblue", marginLeft: "50px" }}>  {sampleNumber} </span>
+          <span style={{ color: "darkgreen" }}> {sampleNumber2} 
+          <span className="player" style={{ display: Player2Key === false ? "none" : "block" }}> Next Turn Player2 </span>
+            </span>
+          <span className="player" style={{ display: Player1Key === false ? "none" : "block", color: "darkblue" }}> Next Turn Player1 </span>
         </div>
-        {/* <div className="fade-in2">
-          <p> {sampleNumber2} </p>
-        </div> */}
       </div>
     </div>
   );
